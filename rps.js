@@ -18,39 +18,57 @@ function getComputerChoice() {
 function playRound(playerSelection, computerSelection) {
     switch (playerSelection) {
         case "rock":
-            if (computerSelection == "rock")
-                return "You chose Rock and the Computer chose Rock!Its a Draw!"
+            if (computerSelection == "rock") {
+                console.log("You chose Rock and the Computer chose Rock!Its a Draw!")
+                return 1
+            }
+
+            if (computerSelection == "scissors") {
+                console.log("You Win! Rock breaks Scissors!")
+                return 0
+            }
 
 
-            if (computerSelection == "scissors")
-                return "You Win! Rock breaks Scissors!"
+            if (computerSelection == "paper") {
 
+                console.log("You Lose! Paper covers Rock!")
+                return 2
+            }
 
-            if (computerSelection == "paper")
-
-                return "You Lose! Paper covers Rock!"
             break;
 
         case "scissors":
-            if (computerSelection == "rock")
-                return "You Lose! Rock breaks Scissors!"
+            if (computerSelection == "rock") {
+                console.log("You Lose! Rock breaks Scissors!")
+                return 2
+            }
 
-            if (computerSelection == "scissors")
-                return "You chose Scissors and the Computer chose Scissors! Its a Draw!"
+            if (computerSelection == "scissors") {
+                console.log("You chose Scissors and the Computer chose Scissors! Its a Draw!")
+                return 1
+            }
 
-            if (computerSelection == "paper")
-                return "You Win! Scissors cuts Paper!"
+            if (computerSelection == "paper") {
+                console.log("You Win! Scissors cuts Paper!")
+                return 0
+            }
             break;
 
         case "paper":
-            if (computerSelection == "rock")
-                return "You Win! Paper covers Scissors!"
+            if (computerSelection == "rock") {
+                console.log("You Win! Paper covers Scissors!")
+                return 0
+            }
 
-            if (computerSelection == "scissors")
-                return "You Lose! Scissors cuts Paper!"
+            if (computerSelection == "scissors") {
+                console.log("You Lose! Scissors cuts Paper!")
+                return 2
+            }
 
-            if (computerSelection == "paper")
-                return "You chose Paper and the Computer chose Paper! Its a Draw!"
+            if (computerSelection == "paper") {
+                console.log("You chose Paper and the Computer chose Paper! Its a Draw!")
+                return 1
+            }
             break;
 
         default:
@@ -59,16 +77,44 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-/*
-console.log("You picked " + playerSelection)
-console.log("Computer picked " + computerSelection)
-console.log(playRound(playerSelection, computerSelection))
-*/
 
+function game() {
+    let playerScore = 0
+    let computerScore = 0
+    for (let loop = 0; loop < 5; loop++) {
+        const playerSelection = prompt("Make your choice!").toLowerCase();
+        const computerSelection = getComputerChoice();
+        let result = playRound(playerSelection, computerSelection)
+        if (result == 0) {
+            playerScore++
+        }
+        if (result == 2) {
+            computerScore++
+        }
+    }
+    let winnerMessage = getWinner(playerScore, computerScore)
+    console.log(winnerMessage)
 
-for (let loop = 0; loop < 5; loop++) {
-    const playerSelection = prompt("Make your choice!").toLowerCase();
-    const computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection))
 
 }
+
+function getWinner(playerScore, computerScore) {
+
+    if (playerScore > computerScore) {
+        return "Congratulations! You won!"
+    }
+
+    if (playerScore < computerScore) {
+
+        return "GG No Re"
+    }
+
+    if (playerScore == computerScore) {
+        return "What are the chances?! Draw!"
+    }
+
+
+
+}
+
+game()
